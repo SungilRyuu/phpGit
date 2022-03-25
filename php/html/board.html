@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+        <!-- SEO(검색 엔진 최적화) -->
+        <meta name="author" content="Illie">
+        <meta name="description" content="웹 표준을 준수한 사이트입니다.">
+        <meta name="keywords" content="웹표준, 웹접근성, 웹호환성, 사이트제작, 사이트만들기, 포트폴리오">
+        <meta name="robots" content="all">
+    
+        <!-- 아이콘 & 파비콘 -->
+        <link rel="shortcut icon" type="image/x-icon" href="img/facicon.ico">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/icon114.png">
+        <link rel="apple-touch-icon" href="img/icon114.png">
+        <link rel="apple-touch-icon-precomposed" href="img/icon114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="167x167" href="img/icon167.png">
+    
+        <!-- CSS style -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/fonts.css">
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body>
+    <div id="skip">
+        <a href="#main">컨텐츠 바로가기</a>
+        <a href="#footer">푸터 바로가기</a>
+    </div>
+    
+    <header id="header">
+        <h1 class="logo">
+            <a href="index.html">PHP <em>class</em></a>
+        </h1>
+        <nav class="menu">
+            <h2 class="ir_so">메인 메뉴</h2>
+            <ul>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">댓글</a></li>
+                <li><a href="#">게시판</a></li>
+                <li><a href="#">블로그</a></li>
+                <li><a href="#">관리자</a></li>
+            </ul>
+        </nav>
+        <div class="member">
+            <a href="join.html">회원가입</a>
+            <a href="login.html">로그인</a>
+        </div>
+    </header>
+    <!-- //header -->
+
+    <main id="contents">
+        <h2 class="ir_so">컨텐츠 영역</h2>
+        <section id="board-type" class="section center mb100">
+            <div class="container">
+                <h3 class="section__title">강의 게시판</h3>
+                <p class="section__desc">
+                    강의 관련 게시판입니다. 궁금한 점이 있다면 뭐든 물어보세요!
+                </p>
+                <div class="board__inner">
+                    <div class="board__search">
+                        <form action="boardSearch.php" name="boardSearch" method="get">
+                            <fieldset>
+                                <legend class="ir_so">게시판 검색 영역</legend>
+                                <div>
+                                    <input type="search" name="search-form" class="search-form" placeholder="검색어를 입력하세요." aria-label="search" required>
+                                </div>
+                                <div>
+                                    <select name="search-option" id="search-option" class="search-option">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                        <option value="name">등록자</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button type="submit" class="search-btn">검색</button>
+                                </div>
+                                <div>
+                                    <a href="boardWrite.php" class="search-btn black">글쓰기</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="board__table">
+                        <table class="hover">
+                            <colgroup>
+                                <col style="width: 5%;">
+                                <col>
+                                <col style="width: 10%;">
+                                <col style="width: 12%;">
+                                <col style="width: 7%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>등록자</th>
+                                    <th>등록일</th>
+                                    <th>조회수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="left">이전 수업 내용은 여기서 확인하세요!</td>
+                                    <td>Illie</td>
+                                    <td>2022-12-30</td>
+                                    <td>300</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="left">이번 주 수업 내용은 여기서 확인해 보세요!</td>
+                                    <td>Illie</td>
+                                    <td>2022-03-04</td>
+                                    <td>57</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="left">다음 주 수업 내용은 여기서 확인해 보세요!</td>
+                                    <td>Illie</td>
+                                    <td>2022-03-05</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="left">아니 아무 것도 모르겠습니다 어떻게 하죠? 근데 제목은 몇 글자까지 적히는지 궁금해요 계속 적어볼...</td>
+                                    <td>릴리</td>
+                                    <td>2022-03-08</td>
+                                    <td>77</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="left">오늘 수업 중에 질문이 있습니다.</td>
+                                    <td>3M</td>
+                                    <td>2022-03-04</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td class="left">똑같이 하는 데 저는 왜 안될까요?</td>
+                                    <td>포스트잇</td>
+                                    <td>2022-02-21</td>
+                                    <td>89</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td class="left">HTML과 CSS 필수 인가요?</td>
+                                    <td>궁금</td>
+                                    <td>2022-02-01</td>
+                                    <td>57</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td class="left">할일이 너무 많은 데 시간은 모자라요 어떡하죠?</td>
+                                    <td>이야호</td>
+                                    <td>2022-01-31</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td class="left">게시판도 직접 만드신건가요? 어떻게 만드셨나요?</td>
+                                    <td>박박이</td>
+                                    <td>2022-01-15</td>
+                                    <td>13</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td class="left">취업 고민은 어디로 하나요? 여기다 하면 되나요? 모르겠으니 그냥 여기다 할게요.</td>
+                                    <td>웰스</td>
+                                    <td>2022-01-11</td>
+                                    <td>40</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="board__pages">
+                        <ul>
+                            <li><a href="#">처음으로</a></li>
+                            <li><a href="#">이전</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#">7</a></li>
+                            <li><a href="#">8</a></li>
+                            <li><a href="#">다음</a></li>
+                            <li><a href="#">마지막으로</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+        </section>
+    </main>
+    <!-- //main -->
+    
+    <footer id="footer" class="footer gray">
+        <div class="container">
+            <h2 class="ir_so">푸터 바로가기 메뉴</h2>
+            <div class="footer_menu">
+                <div class="footer_type1">
+                    <h3>레이아웃 영역</h3>
+                    <ul>
+                        <li><a href="#">레이아웃 유형01</a></li>
+                        <li><a href="#">레이아웃 유형02</a></li>
+                        <li><a href="#">레이아웃 유형03</a></li>
+                        <li><a href="#">레이아웃 유형04</a></li>
+                        <li><a href="#">레이아웃 유형05</a></li>
+                    </ul>
+                </div>
+                <div class="footer_type2">
+                    <h3>게시판 영역</h3>
+                    <ul>
+                        <li><a href="board.html">게시판</a></li>
+                        <li><a href="boardView.html">게시판 보기</a></li>
+                        <li><a href="boardModify.html">게시판 수정</a></li>
+                        <li><a href="boardWrite.html">게시판 쓰기</a></li>
+                    </ul>
+                </div>
+                <div class="footer_type3">
+                    <h3>메인 영역</h3>
+                    <ul>
+                        <li><a href="#">이미지 유형01</a></li>
+                        <li><a href="#">동영상 유형02</a></li>
+                        <li><a href="#">슬라이드 유형03</a></li>
+                    </ul>
+                </div>
+                <div class="footer_type4">
+                    <h3>컨텐츠 영역</h3>
+                    <ul>
+                        <li><a href="#">텍스트 유형01</a></li>
+                        <li><a href="#">이미지 유형02</a></li>
+                        <li><a href="#">이미지/텍스트03</a></li>
+                        <li><a href="#">카드 유형04</a></li>
+                        <li><a href="#">배너 유형05</a></li>
+                    </ul>
+                </div>
+                <div class="footer_type5">
+                    <h3>푸터 영역</h3>
+                    <ul>
+                        <li><a href="#">컨택트 유형01</a></li>
+                        <li><a href="#">푸터 유형01</a></li>
+                    </ul>
+                </div>
+                <div class="footer_type6">
+                    <h3>사이트</h3>
+                    <ul>
+                        <li><a href="#">웹표준 사이트</a></li>
+                        <li><a href="#">반응형 사이트</a></li>
+                        <li><a href="#">패럴랙스 사이트</a></li>
+                        <li><a href="#">포트폴리오 사이트</a></li>
+                    </ul>
+                </div>
+            </div>
+            <address class="footer_rights">
+                &copy;2022 Illie. All rights reserved.
+            </address>
+        </div>
+    </footer>
+    <!-- //footer -->
+</body>
+</html>
+</body>
+</html>
