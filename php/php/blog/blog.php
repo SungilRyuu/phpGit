@@ -47,35 +47,38 @@
                             </fieldset>
                         </form>
                     </div>
+                    <!-- <div class="blog__btn">
+                        <a href="blogWrite.php">글쓰기</a>
+                    </div> -->
                     <div class="blog__cont">
-                        <?php
-    $sql = "SELECT blogID, blogTitle, blogContents, blogCate, BlogAuthor, blogImgFile, blogRegTime FROM myBlog WHERE blogDelete = 1 ORDER BY blogID DESC";
+<?php
+    $sql = "SELECT blogID, blogTitle, blogContents, blogCate, BlogAuthor, blogImgFile, blogRegTime FROM myBlog ORDER BY blogID DESC";
     $result = $connect -> query($sql);
-    
+
     $blogImgDir = "../assets/img/blog/";
-    
-    ?>
-    <?php foreach($result as $blog){  ?>
+
+    // echo "<pre>";
+    // var_dump($blog);
+    // echo "</pre>";
+?>
+    <? foreach($result as $blog){  ?>
         <article class="blog">
             <figure class='blog__header'>
-                <a href="blogView.php?blogID=<?= $blog['blogID']; ?>" style="background-image:url(../assets/img/blog/<?= $blog['blogImgFile']; ?>)"></a>
+                <a href="blogView.php?blogID=<?= $blog['BlogID']; ?>"><img src="../assets/img/blog/<?= $blog['blogImgFile']; ?>" alt="<? $blog['blogTitle']; ?>"></a>
             </figure>
             <div class='blog__body'>
                 <span class="blog__cate"><?= $blog['blogCate']; ?></span>
-                <div class="blog__title"><a href="blogView.php?blogID=<?= $blog['blogID']; ?>"><?= $blog['blogTitle']; ?></a></div>
-                <div class="blog__desc"><a href="blogView.php?blogID=<?= $blog['blogID']; ?>"><?= $blog['blogContents']; ?></a></div>
+                <div class="blog__title"><?= $blog['blogTitle']; ?></div>
+                <div class="blog__desc"><?= $blog['blogContents']; ?></div>
                 <div class="blog__info">
                     <span class="author"><a href="#"><?= $blog['BlogAuthor']; ?></a></span>
                     <span class="date"><?= date('Y-m-d H:m:s', $blog['blogRegTime']); ?></span>
-                    <span class="modify"><a href="blogModify.php?blogID=<?=$blog['blogID'];?>">수정</a></span>
-                    <span class="delete"><a href="blogRemove.php?blogID=<?=$blog['blogID'];?>" onclick="return noticeRemove();">삭제</a></span>
+                    <span class="modify"><a href="#">수정</a></span>
+                    <span class="delete"><a href="#">삭제</a></span>
                 </div>
             </div>
         </article>
-        <? } ?>
-        <div class="blog__btn">
-            <a href="blogWrite.php">글쓰기</a>
-        </div>
+    <? } ?>
     
 
                         <!-- <article class="blog">
@@ -123,12 +126,5 @@
     include "../include/footer.php";
 ?>
 <!--//footer -->
-<script>
-        function noticeRemove(){
-            let notice = confirm("정말 삭제하시겠습니까?");
-            return notice;
-
-        }
-    </script>
 </body>
 </html>

@@ -16,7 +16,7 @@
     $memberID = $_SESSION['memberID'];
     $blogAuthor = $_SESSION['youName'];
     $blogTitle = $_POST['blogTitle'];
-    $blogContents = nl2br($_POST['blogContents']);
+    $blogContents = $_POST['blogContents'];
     $blogCate = $_POST['blogCate'];
     $blogView = 1;
     $blogLike = 0;
@@ -61,7 +61,7 @@
     // echo $fileType;
     // 이미지 확인 작업 , 이미지 확장자 확인 작업
     
-    if($fileType != "" || $fileType != NULL){
+    if($fileType == "" || $fileType == NULL){
         //확장자 확인
         if($fileExtension == "jpg" || $fileExtension == "jpeg" || $fileExtension == "png" || $fileExtension == "webp" || $fileExtension == "png"){
             $blogImgDir = "../assets/img/blog/";

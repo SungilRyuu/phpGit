@@ -110,7 +110,7 @@
 <?php
     include "../connect/connect.php";
 
-    $sql = "SELECT * FROM myComment ORDER BY commentID DESC";
+    $sql = "SELECT * FROM myComment";
     $result = $connect -> query($sql);
 
     if($result){
