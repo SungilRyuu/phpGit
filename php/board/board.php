@@ -65,6 +65,7 @@
                                 <col style="width: 10%;">
                                 <col style="width: 12%;">
                                 <col style="width: 7%;">
+                                <col style="width: 5%;">
                             </colgroup>
                             <thead>
                                 <tr>
@@ -73,6 +74,7 @@
                                     <th>등록자</th>
                                     <th>등록일</th>
                                     <th>조회수</th>
+                                    <th>좋아요</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,7 +95,7 @@
     //LIMIT 11, 20 --> page2
     //LIMIT 21, 30 --> page3
     //LIMIT 31, 40 --> page4
-    $sql = "SELECT b.boardID, b.boardTitle, m.youName, b.regTime, b.boardView FROM myBoard b JOIN myMember m ON(m.memberID = b.memberID) ORDER BY boardID DESC LIMIT {$pageLimit}, {$pageView}";
+    $sql = "SELECT b.boardID, b.boardTitle, m.youName, b.regTime, b.boardView, b.liked FROM myBoard b JOIN myMember m ON(m.memberID = b.memberID) ORDER BY boardID DESC LIMIT {$pageLimit}, {$pageView}";
     $result = $connect -> query($sql);
 
     if($result){
@@ -108,6 +110,7 @@
                 echo "<td>".$boardInfo['youName']."</td>";
                 echo "<td>".date('Y-m-d', $boardInfo['regTime'])."</td>";
                 echo "<td>".$boardInfo['boardView']."</td>";
+                echo "<td>".$boardInfo['liked']."</td>";
                 echo "</tr>";
             }
         }

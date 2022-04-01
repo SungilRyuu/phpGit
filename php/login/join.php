@@ -122,7 +122,6 @@
                     } else {
                         $("#youEmailComment").text("가입되어 있는 이메일입니다. 로그인을 해주세요.");
                         emailCheck = false;
-
                     }
                 },
                 error : function(request, status, error){
