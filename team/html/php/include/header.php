@@ -1,11 +1,12 @@
 <header id="header">
         <section class="header__wrap white">
-            <div class="headerLogo">PICS</div>
+            <div class="headerLogo"><a href="../mainPage/service.php"> PICS</a></div>
             <div class="middleMenu">
                 <ul>
                     <li><a href="../mainPage/service.php">Service</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="../board/contact.php">Contact</a></li>
+                    <li><a href="../board/about.php">About</a></li>
+                    <li><a href="../board/boardInquiry.php">Inquiry</a></li>
+                    <li><a href="../board/request.php">Request</a></li>
                 </ul>
             </div>
             <div class="SignIn">

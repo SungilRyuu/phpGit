@@ -7,7 +7,7 @@
     $sql .= "boardTitle varchar(50) NOT NULL,";
     $sql .= "boardContents longtext NOT NULL,";
     $sql .= "boardView int(10) NOT NULL,";
-    $sql .= "boardLike int(99) NOT NULL,";
+    $sql .= "boardLike int(99) DEFAULT '0' NULL,";
     $sql .= "regTime int(20) NOT NULL,";
     $sql .= "PRIMARY KEY (boardID)";
     $sql .= ") charset=utf8;";

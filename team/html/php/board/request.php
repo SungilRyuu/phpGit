@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의하기</title>
+    <title>의뢰하기</title>
     <?php
     include '../include/headerblue.php';
 ?>
@@ -28,7 +28,7 @@
 
     <main id="main">
         <h2 class="ir_so">컨텐츠 영역</h2>
-        <section id="board-type" class="section center mb100">
+        <section id="board-type" class="section center">
             <div class="container">
                 <h3 class="section__title">의뢰하기</h3>
                 <p class="section__desc mt30">웹 앨범을 만들어 볼까요?</p>

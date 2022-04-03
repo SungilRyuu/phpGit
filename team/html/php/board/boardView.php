@@ -31,14 +31,31 @@
         <div class="container">
             <h3 class="section__title">문의사항</h3>
             <p class="section__desc">불편했던점과 궁금했던점을 작성해주세요!</p>
-            <div class="board__inner"> 
+            <div class="board__inner">
+                <?php
+                   $boardID = $_GET['boardID'];
+                   $memberID = $_SESSION['memberID'];
 
-                    <button class="button mb20" type="submit" formmethod="get">
-                        <div class="hand">
-                            <div class="thumb"></div>
+                   $sql = "SELECT * FROM myLike WHERE memberID = '$memberID' AND boardID = '$boardID'";
+                   $sqlResult = $connect -> query($sql);
+                   $myLikeData = $sqlResult -> num_rows;
+                   ?>
+
+                <?php if($myLikeData == 0) { ?>
+                    <button class='button mb20' onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>'">
+                        <div class='hand'>
+                            <div class='thumb'></div>
                         </div>
                         <span>Like<span>d</span></span>
                     </button>
+                <?php } else { ?>
+                    <button class='button mb20 liked' onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>'">
+                       <div class='hand'>
+                           <div class='thumb'></div>
+                        </div>
+                        <span>Like<span>d</span></span>
+                    </button>
+                <?php  } ?>
 
                 <div class="board__table">
                     <table class="view">
@@ -72,8 +89,9 @@
                 </div>
                 <div class="board__btn">
 <?php
-    $sql = "SELECT memberID FROM myBoard WHERE boardID = {$boardID}";
+    $sql = "SELECT memberID, boardID FROM myBoard WHERE boardID = {$boardID}";
     $result = $connect -> query($sql);
+
     $boardInfo = $result -> fetch_array(MYSQLI_ASSOC);
 
     if($_SESSION['memberID'] == $boardInfo['memberID']){
@@ -85,8 +103,8 @@
     }
 ?>
                     <!-- <a href="boardInquiry.php">목록보기</a>
-                    <a href="inquiryRemove.php?boardID=<?=$boardID?>" onclick="return noticeRemove();">삭제하기</a>
-                    <a href="inquiryModify.php?boardID=<?=$boardID?>">수정하기</a> -->
+                    <a href="inquiryRemove.php?boardID=$boardID?>" onclick="return noticeRemove();">삭제하기</a>
+                    <a href="inquiryModify.php?boardID=$boardID?>">수정하기</a> -->
                 </div>
             </div>
         </div>

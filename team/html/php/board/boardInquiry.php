@@ -66,6 +66,7 @@
                                 <col style="width: 10%;">
                                 <col style="width: 12%;">
                                 <col style="width: 7%;">
+                                <col style="width: 7%;">
                             </colgroup>
                             <thead>
                                 <tr>
@@ -74,6 +75,7 @@
                                     <th>글쓴이</th>
                                     <th>등록일</th>
                                     <th>조회수</th>
+                                    <th>좋아요</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,7 +92,7 @@
 
  
     
-  $sql = "SELECT b.boardID, b.boardTitle, m.youName, b.regTime, b.boardView FROM myBoard b JOIN myMember m ON(m.memberID = b.memberID) ORDER BY boardID DESC LIMIT {$PageLimit}, {$PageView}";
+  $sql = "SELECT b.boardID, b.boardTitle, m.youName, b.regTime, b.boardView, b.boardLike FROM myBoard b JOIN myMember m ON(m.memberID = b.memberID) ORDER BY boardID DESC LIMIT {$PageLimit}, {$PageView}";
   $result = $connect -> query($sql);
 
   if($result){
@@ -99,12 +101,17 @@
       if($count > 0){
           for($i=1; $i<=$count; $i++){
             $boardInfo = $result -> fetch_array(MYSQLI_ASSOC);
+            $sql1 = "SELECT * FROM myLike WHERE boardID = {$boardInfo['boardID']}";
+            $result1 = $connect -> query($sql1);
+            $counts = $result1 -> num_rows;
+
             echo "<tr onClick=\"location.href='boardView.php?boardID={$boardInfo['boardID']}'\">";
             echo "<td>".$boardInfo['boardID']."</td>";
             echo "<td class='left'><a href='boardView.php?boardID={$boardInfo['boardID']}'>".$boardInfo['boardTitle']."</a></td>";
             echo "<td>".$boardInfo['youName']."</td>";
             echo "<td>".date('Y-m-d', $boardInfo['regTime'])."</td>";
             echo "<td>".$boardInfo['boardView']."</td>";
+            echo "<td>".$counts."</td>";
             echo "</tr>";
           }
       }
