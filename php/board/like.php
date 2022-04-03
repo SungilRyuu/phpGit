@@ -9,6 +9,8 @@
 <body>
 <?php
     include "../connect/connect.php";
+    include "../connect/session.php";
+    include "../connect/sessionCheck.php";
 
     $memberID = $_GET['memberID'];
     $boardID = $_GET['boardID'];
@@ -30,6 +32,8 @@
         $connect -> query($sql);
         echo "<p>삭제</p>";
     }
+
+    echo "<script>history.back(1);</script>";
     
 ?>  
 </body>

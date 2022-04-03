@@ -27,7 +27,7 @@
     <?php
     $boardID = $_GET['boardID'];
     $memberID = $_SESSION['memberID'];
-    echo $boardID, $memberID;
+    // echo $boardID, $memberID;
 ?>
     <main id="contents">
         <h2 class="ir_so">컨텐츠 영역</h2>
@@ -39,12 +39,33 @@
                 </p>
                 <div class="board__inner">
                     <div class="board__table">
-                        <button class="button dark" onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>' ">
+<?php
+$sql = "SELECT * FROM myLike WHERE boardID = {$boardID} AND memberID = {$memberID}";
+$result = $connect -> query($sql);
+$likeCount = $result -> num_rows;
+
+if($likeCount == 0){ ?>
+    <button class="button dark" onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>' ">
+            <div class="hand">
+                <div class="thumb"></div>
+            </div>
+            <span>Like<span>d</span></span>
+    </button>
+<?php } else { ?>
+    <button class="button dark liked" onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>' ">
+            <div class="hand">
+                <div class="thumb"></div>
+            </div>
+            <span>Like<span>d</span></span>
+    </button>
+<?php }?>
+                        <!-- <button class="button dark" onclick="location.href='like.php?boardID=<?=$boardID?>&memberID=<?=$memberID?>' ">
                                 <div class="hand">
                                     <div class="thumb"></div>
                                 </div>
                                 <span>Like<span>d</span></span>
-                        </button>
+                        </button> -->
+
                         <table>
                             <colgroup>
                                 <col style="width: 30%;">
@@ -72,7 +93,6 @@ echo "<tr><th>글쓴이</th><td class='left'>".$boardInfo['youName']."</td></tr>
 echo "<tr><th>등록일</th><td class='left'>".date('Y-m-d H:i', $boardInfo['regTime'])."</td></tr>";
 echo "<tr><th>조회수</th><td class='left'>".$boardInfo['boardView']."</td></tr>";
 echo "<tr class='height'><th>내용</th><td class='left height'>".$boardInfo['boardContents']."</td></tr>";
-echo "<tr><th>좋아요</th><td class='left'>".$boardInfo['liked']."</td></tr>";
 ?>
 
                             </tbody>

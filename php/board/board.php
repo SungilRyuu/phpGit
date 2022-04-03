@@ -98,19 +98,23 @@
     $sql = "SELECT b.boardID, b.boardTitle, m.youName, b.regTime, b.boardView, b.liked FROM myBoard b JOIN myMember m ON(m.memberID = b.memberID) ORDER BY boardID DESC LIMIT {$pageLimit}, {$pageView}";
     $result = $connect -> query($sql);
 
+    
     if($result){
         $count = $result -> num_rows;
-
+        
         if($count > 0){
             for($i = 1; $i<=$count; $i++){
                 $boardInfo = $result -> fetch_array(MYSQLI_ASSOC);
+                $sql2 = "SELECT * FROM myLike WHERE boardID = {$boardInfo['boardID']}";
+                $results = $connect -> query($sql2);
+                $counts = $results -> num_rows;
                 echo "<tr>";
                 echo "<td>".$boardInfo['boardID']."</td>";
                 echo "<td class='left'><a href='boardView.php?boardID={$boardInfo['boardID']}'>".$boardInfo['boardTitle']."</a></td>";
                 echo "<td>".$boardInfo['youName']."</td>";
                 echo "<td>".date('Y-m-d', $boardInfo['regTime'])."</td>";
                 echo "<td>".$boardInfo['boardView']."</td>";
-                echo "<td>".$boardInfo['liked']."</td>";
+                echo "<td>".$counts."</td>";
                 echo "</tr>";
             }
         }
