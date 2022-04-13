@@ -34,12 +34,18 @@
             <div class="member-form">
                 <h3>회원 정보</h3>
 
-                <form action="mypageSave.php" name="mypage" method="post">
+<?php 
+    $memberID = $_SESSION['memberID'];
+    $sql = "SELECT youPhoto FROM myMember WHERE memberID = {$memberID}";
+    $result = $connect -> query($sql);
+    $info = $result -> fetch_array(MYSQLI_ASSOC);
+?>
+                <form action="mypageSave.php" name="mypage" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="ir_so">회원정보 입력폼</legend>
                         <div class="join-intro">
                             <div class="face">
-                                <img src="../assets/img/mypage/default.svg" alt="기본이미지">
+                                <img src="../assets/img/mypage/<?= $info['youPhoto']?>" alt="기본이미지">
                             </div>
                             <div class="intro">웹과 코딩에 관심이 많은 사람입니다.</div>
                         </div>
@@ -60,6 +66,7 @@
         echo "<div class='modify'><label for='youName'>이름</label> <input type='text' id='youName' name='youName' maxlength='5' value='".$myPageInfo['youName']."'></div>";
         echo "<div class='modify'><label for='youBirth'>생년월일</label> <input type='text' id='youBirth' name='youBirth' maxlength='12' value='".$myPageInfo['youBirth']."'></div>";
         echo "<div class='modify'><label for='youPhone'>휴대폰 번호</label> <input type='text' id='youPhone' name='youPhone' maxlength='15' value='".$myPageInfo['youPhone']."'></div>";
+        echo "<div class='modify'><label for='youPhoto'>사진 수정하기</label> <input type='file' id='youPhoto' name='youPhoto' accept='image/*'></div>";
         echo "<div class='modify'><label for='youPass'>비밀번호</label> <input type='password' id='youPass' name='youPass' maxlength='15' required></div>";
     }
 
@@ -67,6 +74,7 @@
 
                         </div>
                         <button id="joinBtn" class="join-submit" type="submit">회원가입 수정</button>
+                        <button id="joinBtn" class="join-submit mt20" onclick="location.href='mypageLeave.php'">탈퇴하기</button>
                     </fieldset>
                 </form>
             </div>

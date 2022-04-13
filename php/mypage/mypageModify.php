@@ -28,6 +28,12 @@
     ?>
     <!-- //header  -->
     
+<?php 
+    $memberID = $_SESSION['memberID'];
+    $sql = "SELECT youPhoto FROM myMember WHERE memberID = {$memberID}";
+    $result = $connect -> query($sql);
+    $info = $result -> fetch_array(MYSQLI_ASSOC);
+?>
     <main id="contents">
         <h2 class="ir_so">컨텐츠 영역</h2>
         <section class="join-type gray">
@@ -35,7 +41,7 @@
                 <h3>회원 정보</h3>
                 <div class="join-intro">
                     <div class="face">
-                        <img src="../assets/img/mypage/default.svg" alt="기본이미지">
+                        <img src="../assets/img/mypage/<?= $info['youPhoto']?>" alt="기본이미지">
                     </div>
 <?php
     $memberID = $_SESSION['memberID'];
@@ -62,14 +68,13 @@
     echo "<li><strong>생년월일</strong><span>".$myPageInfo['youBirth']."</span></li>";
     echo "<li><strong>연락처</strong><span>".$myPageInfo['youPhone']."</span></li>";
     echo "<li><strong>성별</strong><span>".$myPageInfo['youGender']."</span></li>";
-    echo "<li><strong>사이트</strong><span>".$myPageInfo['youSite']."</span></li>";
 ?>
                     </ul>
 
                 </div>
                 <div class="join-btn">
-                    <a href="mypageModify.php">수정하기</a>
-                    <a href="mypageRemove.php">탈퇴하기</a>
+                    <a href="mypage.php">수정하기</a>
+                    <a href="../login/logout.php">로그아웃</a>
                 </div>
             </div>
         </section>

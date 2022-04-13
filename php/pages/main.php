@@ -16,8 +16,9 @@
     ?>
     
     <style>
-        .footer {
-            background-color: lightgrey !important;
+
+        #quiz-type {
+            background-color: #eee !important;
         }
         /* slider */
         .slider__wrap {}
@@ -372,54 +373,50 @@
     
     foreach($result as $quiz){
 ?>
-        <section id="notice-type" class="section center">
+        <section id="quiz-type" class="section center">
             <div class="container">
                 <h3 class="section__title">새로운 퀴즈</h3>
                 <p class="section__desc">최신 퀴즈를 풀어볼까요?</p>
                 <div class="quiz__inner">
                     <div class="quiz__header">
                         <div class="quiz__subject">
-                            <label for="quizSubject">과목 선택</label>
-                            <select name="quizSubject" id="quizSubject">
-                                <option value="javascript">javascript</option>
-                                <option value="html">html</option>
-                                <option value="css">css</option>
-                                <option value="php">php</option>
-                            </select>
+                            <p value="<?=$quiz['quizSubject']?>"><?=$quiz['quizSubject']?></p>
                         </div>
                     </div>
                     <div class="quiz__body">
                         <div class="title">
-                            <span class="quiz__num"></span>.
-                            <span class="quiz__ask"></span>
-                            <div class="quiz__desc"></div>
+                            <span class="quiz__num"><?=$quiz['quizID']?></span>.
+                            <span class="quiz__ask"><?=$quiz['quizAsk']?></span>
+                            <div class="quiz__desc"><?=$quiz['quizDesc']?></div>
                         </div>
                         <div class="contents">
                             <div class="quiz__selects">
                                 <label for="select1">
-                                    <input class="select" type="radio" id="select1" name="select" value="1">
-                                    <span class="choice"></span>
+                                    <input class="select" type="radio" id="select1" name="select" value="1" onclick="checkQuiz1()">
+                                    <span class="choice"><?=$quiz['quizChoice1']?></span>
                                 </label>
                                 <label for="select2">
-                                    <input class="select" type="radio" id="select2" name="select" value="2">
-                                    <span class="choice"></span>
+                                    <input class="select" type="radio" id="select2" name="select" value="2" onclick="checkQuiz2()">
+                                    <span class="choice"><?=$quiz['quizChoice2']?></span>
                                 </label>
                                 <label for="select3">
-                                    <input class="select" type="radio" id="select3" name="select" value="3">
-                                    <span class="choice"></span>
+                                    <input class="select" type="radio" id="select3" name="select" value="3" onclick="checkQuiz3()">
+                                    <span class="choice"><?=$quiz['quizChoice3']?></span>
                                 </label>
                                 <label for="select4">
-                                    <input class="select" type="radio" id="select4" name="select" value="4">
-                                    <span class="choice"></span>
+                                    <input class="select" type="radio" id="select4" name="select" value="4" onclick="checkQuiz4()">
+                                    <span class="choice"><?=$quiz['quizChoice4']?></span>
+                                </label>
+                                <label for="answer" style="display:none">
+                                    <input class="select" type="radio" id="answer" name="select" value="<?=$quiz['quizAnswer']?>">
+                                    <span class="choice"><?=$quiz['quizAnswer']?></span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="quiz__footer">
                         <div class="quiz__btn">
-                            <button class="comment green none">해설 보기</button>
-                            <button class="confirm ml10 yellow right">정답 확인</button>
-                            <button class="next orange right none">다음 문제</button>
+                            <button class="confirm ml10 yellow right" onclick="location.href='../quiz/quiz.php';">문제 더 풀러가기</button>
                         </div>
                     </div>
                 </div>
@@ -436,6 +433,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 
+    let quiz = document.querySelector(".quiz__selects");
+    let choice1 = quiz.querySelector("#select1");
+    let choice2 = quiz.querySelector("#select2");
+    let choice3 = quiz.querySelector("#select3");
+    let choice4 = quiz.querySelector("#select4");
+    let answer = quiz.querySelector("#answer");
+
+
+    function checkQuiz1(){
+        if(choice1.value == answer.value){
+            choice1.classList.add("correct");
+        } else {
+            choice1.classList.add("incorrect");
+        }
+    }
+    function checkQuiz2(){
+        if(choice2.value == answer.value){
+            choice2.classList.add("correct");
+        } else {
+            choice2.classList.add("incorrect");
+        }
+    }
+    function checkQuiz3(){
+        if(choice3.value == answer.value){
+            choice3.classList.add("correct");
+        } else {
+            choice3.classList.add("incorrect");
+        }
+    }
+    function checkQuiz4(){
+        if(choice4.value == answer.value){
+            choice4.classList.add("correct");
+        } else {
+            choice4.classList.add("incorrect");
+        }
+    }
+
+        function quizCheck(){
+            let selectCheck = $(".quiz__selects input:checked").val();
+            // 정답 체크 안했으면
+            if(selectCheck == null || selectCheck == ''){
+                alert("정답을 체크해주세요.");
+            } else {
+                $(".quiz__btn .next").slideDown();
+                selectCheck
+                // 정답 체크 했으면 if-> 정답 else -> 오답
+                if(selectCheck == quizAnswer){
+                    $(".quiz__selects #select"+quizAnswer).addClass("correct");
+                } else {
+                    $(".quiz__selects #select"+selectCheck).addClass("incorrect");
+                    $(".quiz__selects #select"+quizAnswer).addClass("correct");
+                }
+            }
+        }
+
+
     const sliderWrap = document.querySelector(".slider__wrap");
     const sliderImg = document.querySelector(".slider__img"); //이미지 한칸만 움직이는 영역
     const sliderInner = document.querySelector(".slider__inner"); //이미지 움직이는 영역
@@ -451,8 +504,8 @@
     let sliderWidth = sliderImg.offsetWidth; //가로 값
     let sliderLength = slider.length; //이미지 갯수
 
-    console.log(sliderWidth);
-    console.log(sliderLength);
+    // console.log(sliderWidth);
+    // console.log(sliderLength);
 
     let sliderFirst = slider[0]; //첫번째이미지
     let sliderLast = slider[sliderLength - 1]; //마지막이미지
@@ -472,7 +525,7 @@
         sliderInner.classList.add("transition");
         sliderInner.style.left = -100 * (index + 1) + "vw";
 
-        console.log(currentIndex);
+        // console.log(currentIndex);
         currentIndex = index;
 
 
@@ -494,8 +547,6 @@
         sliderDot.firstElementChild.classList.add("active");
     }
     dotInit();
-   
-        // dotactive
         
     document.querySelectorAll(".slider__dot .dot").forEach((dot, index) => {
         dot.addEventListener("click", () => {
@@ -578,7 +629,12 @@
             sliderDot.querySelector(".stop").classList.remove("show");
             stopPlay();
         });
-        </script>
+
+
+        // //banner
+
+
+    </script>
 
 </body>
 </html>

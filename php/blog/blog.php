@@ -48,14 +48,28 @@
                         </form>
                     </div>
                     <div class="blog__cont">
-                        <?php
-    $sql = "SELECT blogID, blogTitle, blogContents, blogCate, BlogAuthor, blogImgFile, blogRegTime FROM myBlog WHERE blogDelete = 1 ORDER BY blogID DESC";
+<?php
+
+    $memberID = $_SESSION['memberID'];
+
+    if(isset($_GET['page'])){
+        $page = (int) $_GET['page'];
+    } else {
+        $page = 1;
+    }
+
+    //게시판 불러올 갯수
+    $pageView = 5;
+    $pageLimit = ($pageView * $page) - $pageView;
+    
+    $sql = "SELECT * FROM myBlog b JOIN myMember m ON(m.memberID = b.memberID) WHERE blogDelete = 1 ORDER BY blogID DESC LIMIT {$pageLimit}, {$pageView}";
     $result = $connect -> query($sql);
-    
+
     $blogImgDir = "../assets/img/blog/";
-    
-    ?>
-    <?php foreach($result as $blog){  ?>
+
+
+    foreach($result as $blog){
+     ?>
         <article class="blog">
             <figure class='blog__header'>
                 <a href="blogView.php?blogID=<?= $blog['blogID']; ?>" style="background-image:url(../assets/img/blog/<?= $blog['blogImgFile']; ?>)"></a>
@@ -65,18 +79,19 @@
                 <div class="blog__title"><a href="blogView.php?blogID=<?= $blog['blogID']; ?>"><?= $blog['blogTitle']; ?></a></div>
                 <div class="blog__desc"><a href="blogView.php?blogID=<?= $blog['blogID']; ?>"><?= $blog['blogContents']; ?></a></div>
                 <div class="blog__info">
-                    <span class="author"><a href="#"><?= $blog['BlogAuthor']; ?></a></span>
+                    <span class="author"><a href="#"><?= $blog['blogAuthor']; ?></a></span>
                     <span class="date"><?= date('Y-m-d H:m:s', $blog['blogRegTime']); ?></span>
+                    <?php if($blog['memberID'] == $memberID ){ ?>
                     <span class="modify"><a href="blogModify.php?blogID=<?=$blog['blogID'];?>">수정</a></span>
                     <span class="delete"><a href="blogRemove.php?blogID=<?=$blog['blogID'];?>" onclick="return noticeRemove();">삭제</a></span>
+                    <?php }?>
                 </div>
             </div>
         </article>
-        <? } ?>
+        <?php } ?>
         <div class="blog__btn">
             <a href="blogWrite.php">글쓰기</a>
         </div>
-    
 
                         <!-- <article class="blog">
                             <figure class='blog__header'>
@@ -95,7 +110,13 @@
                             </div>
                         </article> -->
                     </div>
+
                     <div class="blog__pages">
+                        <ul>
+<?php
+    include "blogPages.php";
+?>
+                    <!-- <div class="blog__pages">
                         <ul>
                             <li><a href="#">&lt;&lt;</a></li>
                             <li><a href="#">&lt;</a></li>
@@ -108,7 +129,7 @@
                             <li><a href="board.php?page=7">7</a></li>
                             <li><a href="board.php?page=8">8</a></li>
                             <li><a href="#">&gt;</a></li>
-                            <li><a href="#">&gt;&gt;</a></li>
+                            <li><a href="#">&gt;&gt;</a></li> -->
                         </ul>
                     </div>
                 </div>

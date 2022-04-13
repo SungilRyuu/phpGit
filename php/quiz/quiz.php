@@ -118,13 +118,12 @@
                 // 정답 체크 했으면 if-> 정답 else -> 오답
                 if(selectCheck == quizAnswer){
                     $(".quiz__selects #select"+quizAnswer).addClass("correct");
+                    $(".quiz__selects #select"+comment).addClass("comment");
                 } else {
                     $(".quiz__selects #select"+selectCheck).addClass("incorrect");
                     $(".quiz__selects #select"+quizAnswer).addClass("correct");
                 }
             }
-
-            
         }
         
         // 다음 문제 
